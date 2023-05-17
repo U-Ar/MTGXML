@@ -1,0 +1,10 @@
+<xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema"
+           targetNamespace="https://github.com/U-Ar/MTGXML"
+           xmlns:tns="https://github.com/U-Ar/MTGXML"
+           elementFormDefault="qualified">
+  <xs:element name="deck">
+    <xs:complexType>
+    
+    </xs:complexType>
+  </xs:element>
+</xs:schema>
