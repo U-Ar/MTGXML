@@ -2,9 +2,29 @@
            targetNamespace="https://github.com/U-Ar/MTGXML"
            xmlns:tns="https://github.com/U-Ar/MTGXML"
            elementFormDefault="qualified">
+  <xs:annotation>
+    <xs:documentation>
+      MTGXML v0.1
+      Deck Schema
+    </xs:documentation>
+  </xs:annotation>
   <xs:element name="deck">
     <xs:complexType>
-    
+
+      <xs:attribute name="env">
+        <xs:simpleType>
+          <xs:restriction base="xs:string">
+            <xs:enumeration value="tabletop"/>
+            <xs:enumeration value="mtga"/>
+            <xs:enumeration value="mo"/>
+          </xs:restriction>
+        </xs:simpleType>
+      </xs:attribute>
+      
+      <xs:attribute name="format"></xs:attribute>
+      <xs:attribute name="latestExpansion" type="xs:string"></xs:attribute>
+      <xs:attribute name="constructedDate" type="xs:date"/>
+
     </xs:complexType>
   </xs:element>
 </xs:schema>
