@@ -1,30 +1,100 @@
 <xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema"
-           targetNamespace="https://github.com/U-Ar/MTGXML"
-           xmlns:tns="https://github.com/U-Ar/MTGXML"
-           elementFormDefault="qualified">
+  targetNamespace="https://github.com/U-Ar/MTGXML"
+  xmlns:tns="https://github.com/U-Ar/MTGXML"
+  elementFormDefault="qualified">
   <xs:annotation>
-    <xs:documentation>
-      MTGXML v0.1
-      Deck Schema
-    </xs:documentation>
+    <xs:documentation> MTGXML v0.1 beta Deck Schema </xs:documentation>
   </xs:annotation>
   <xs:element name="deck">
     <xs:complexType>
 
-      <xs:attribute name="env">
+      <!-- child elements of deck -->
+      <xs:sequence>
+        <xs:element name="commander" minOccurs="0" maxOccurs="1">
+          <xs:complexType>
+            <xs:sequence>
+              <xs:element ref="tns:commanderCardItem" minOccurs="1" maxOccurs="unbounded"/>
+              <xs:element ref="tns:cardItem" minOccurs="0" maxOccurs="unbounded" />
+            </xs:sequence>
+            <xs:attribute name="num" type="xs:positiveInteger" use="optional" />
+          </xs:complexType>
+        </xs:element>
+
+        <xs:element name="main" minOccurs="1" maxOccurs="1">
+          <xs:complexType>
+            <xs:sequence>
+              <xs:element ref="tns:cardItem" minOccurs="1" maxOccurs="unbounded" />
+            </xs:sequence>
+            <xs:attribute name="num" type="xs:positiveInteger" use="optional" />
+          </xs:complexType>
+        </xs:element>
+
+        <xs:element name="side" minOccurs="0" maxOccurs="1">
+          <xs:complexType>
+            <xs:sequence>
+              <xs:element ref="tns:companionCardItem" minOccurs="0" maxOccurs="1"/>
+              <xs:element ref="tns:cardItem" minOccurs="0" maxOccurs="unbounded" />
+            </xs:sequence>
+            <xs:attribute name="num" type="xs:positiveInteger" use="optional" />
+          </xs:complexType>
+        </xs:element>
+      </xs:sequence>
+
+      <!-- attributes of deck -->
+      <xs:attribute name="name" type="xs:string" use="optional" />
+
+      <xs:attribute name="env" use="optional">
         <xs:simpleType>
           <xs:restriction base="xs:string">
-            <xs:enumeration value="tabletop"/>
-            <xs:enumeration value="mtga"/>
-            <xs:enumeration value="mo"/>
+            <xs:enumeration value="tabletop" />
+            <xs:enumeration value="mtga" />
+            <xs:enumeration value="mo" />
+            <xs:enumeration value="other" />
           </xs:restriction>
         </xs:simpleType>
       </xs:attribute>
-      
-      <xs:attribute name="format"></xs:attribute>
-      <xs:attribute name="latestExpansion" type="xs:string"></xs:attribute>
-      <xs:attribute name="constructedDate" type="xs:date"/>
 
+      <xs:attribute name="format" use="optional">
+        <xs:simpleType>
+          <xs:restriction base="xs:string">
+            <xs:enumeration value="standard" />
+            <!-- TODO: enumeration of formats -->
+          </xs:restriction>
+        </xs:simpleType>
+      </xs:attribute>
+
+      <xs:attribute name="latestExpansion" type="xs:string" use="optional"></xs:attribute>
+      <xs:attribute name="constructedDate" type="xs:date" use="optional" />
+    </xs:complexType>
+  </xs:element>
+
+
+  <xs:complexType name="cardItemType">
+    <xs:attribute name="num" type="xs:positiveInteger" use="required" />
+  </xs:complexType>
+
+
+  <xs:element name="cardItem">
+    <xs:complexType>
+      <xs:complexContent>
+        <xs:extension base="tns:cardItemType"></xs:extension>
+      </xs:complexContent>
+    </xs:complexType>
+  </xs:element>
+
+  <xs:element name="commanderCardItem">
+    <xs:complexType>
+      <xs:complexContent>
+        <xs:extension base="tns:cardItemType"></xs:extension>
+      </xs:complexContent>
+    </xs:complexType>
+  </xs:element>
+
+  <xs:element name="companionCardItem">
+    <xs:complexType>
+      <xs:complexContent>
+        <xs:extension base="tns:cardItemType"></xs:extension>
+      </xs:complexContent>
     </xs:complexType>
   </xs:element>
 </xs:schema>
