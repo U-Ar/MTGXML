@@ -13,7 +13,7 @@
         <xs:element name="commander" minOccurs="0" maxOccurs="1">
           <xs:complexType>
             <xs:sequence>
-              <xs:element ref="tns:commanderCardItem" minOccurs="1" maxOccurs="unbounded"/>
+              <xs:element ref="tns:commanderCardItem" minOccurs="1" maxOccurs="unbounded" />
               <xs:element ref="tns:cardItem" minOccurs="0" maxOccurs="unbounded" />
             </xs:sequence>
             <xs:attribute name="num" type="xs:positiveInteger" use="optional" />
@@ -32,7 +32,7 @@
         <xs:element name="side" minOccurs="0" maxOccurs="1">
           <xs:complexType>
             <xs:sequence>
-              <xs:element ref="tns:companionCardItem" minOccurs="0" maxOccurs="1"/>
+              <xs:element ref="tns:companionCardItem" minOccurs="0" maxOccurs="1" />
               <xs:element ref="tns:cardItem" minOccurs="0" maxOccurs="unbounded" />
             </xs:sequence>
             <xs:attribute name="num" type="xs:positiveInteger" use="optional" />
@@ -70,6 +70,36 @@
 
 
   <xs:complexType name="cardItemType">
+    <xs:sequence>
+      <xs:element name="idName" type="xs:string" />
+      <xs:element name="cardType" minOccurs="0">
+        <xs:simpleType>
+          <xs:restriction base="xs:string">
+            <xs:enumeration value="creature" />
+            <xs:enumeration value="artifact" />
+            <xs:enumeration value="enchantment" />
+            <xs:enumeration value="land" />
+            <xs:enumeration value="sorcery" />
+            <xs:enumeration value="instant" />
+            <xs:enumeration value="planeswalker"/>
+            <xs:enumeration value="battle" />
+            <xs:enumeration value="tribal" />
+            <xs:enumeration value="dungeon" />
+          </xs:restriction>
+        </xs:simpleType>
+      </xs:element>
+      <xs:element name="subtype" type="xs:string" minOccurs="0" />
+      <xs:element name="color" type="xs:string" minOccurs="0"/>
+      <xs:element name="manaCost" type="xs:string" minOccurs="0"/>
+      <xs:element name="totalManaValue" type="xs:string" minOccurs="0"/>
+      <xs:element name="meta" minOccurs="0">
+        <xs:complexType>
+          <xs:sequence>
+            <!-- TODO: meta info enumeration -->
+          </xs:sequence>
+        </xs:complexType>
+      </xs:element>
+    </xs:sequence>
     <xs:attribute name="num" type="xs:positiveInteger" use="required" />
   </xs:complexType>
 
