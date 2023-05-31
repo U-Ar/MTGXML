@@ -8,3 +8,8 @@ Trial to define XML schema of Magic: the Gathering decks, cards, and etc.
 ## Considerations on deck schema
 
 [deckSchema.md](deckSchema.md)
+
+## TODO
+
+- Choose a XML validator
+- Put some examle xml files
