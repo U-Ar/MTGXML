@@ -57,8 +57,32 @@
       <xs:attribute name="format" use="optional">
         <xs:simpleType>
           <xs:restriction base="xs:string">
+            <!-- constructed -->
             <xs:enumeration value="standard" />
-            <!-- TODO: enumeration of formats -->
+            <xs:enumeration value="pioneer" />
+            <xs:enumeration value="modern" />
+            <xs:enumeration value="legacy" />
+            <xs:enumeration value="vintage" />
+            <xs:enumeration value="pauper" />
+            <xs:enumeration value="block" />
+            <xs:enumeration value="extended" />
+            <!-- limited -->
+            <xs:enumeration value="booster-draft" />
+            <xs:enumeration value="rochester-draft" />
+            <xs:enumeration value="sealed" />
+            <!-- arena only -->
+            <xs:enumeration value="alchemy" />
+            <xs:enumeration value="historic" />
+            <xs:enumeration value="explorer" />
+            <xs:enumeration value="historic-brawl" />
+            <xs:enumeration value="artisan" />
+            <xs:enumeration value="historic-artisan" />
+            <!-- special -->
+            <xs:enumeration value="commander" />
+            <xs:enumeration value="brawl" />
+            <xs:enumeration value="two-headed" />
+            <xs:enumeration value="oath-breaker" />
+            <!-- TODO: remaining formats -->
           </xs:restriction>
         </xs:simpleType>
       </xs:attribute>
@@ -81,7 +105,7 @@
             <xs:enumeration value="land" />
             <xs:enumeration value="sorcery" />
             <xs:enumeration value="instant" />
-            <xs:enumeration value="planeswalker"/>
+            <xs:enumeration value="planeswalker" />
             <xs:enumeration value="battle" />
             <xs:enumeration value="tribal" />
             <xs:enumeration value="dungeon" />
@@ -89,20 +113,128 @@
         </xs:simpleType>
       </xs:element>
       <xs:element name="subtype" type="xs:string" minOccurs="0" />
-      <xs:element name="color" type="xs:string" minOccurs="0"/>
-      <xs:element name="manaCost" type="xs:string" minOccurs="0"/>
-      <xs:element name="totalManaValue" type="xs:string" minOccurs="0"/>
+      <xs:element name="color" type="xs:string" minOccurs="0" />
+      <xs:element name="manaCost" type="xs:string" minOccurs="0" />
+      <xs:element name="totalManaValue" type="xs:string" minOccurs="0" />
       <xs:element name="meta" minOccurs="0">
         <xs:complexType>
           <xs:sequence>
-            <!-- TODO: meta info enumeration -->
+            <!-- languages supported ever -->
+            <xs:element name="language" minOccurs="0">
+              <xs:simpleType>
+                <xs:restriction base="xs:string">
+                  <xs:enumeration value="en" />
+                  <xs:enumeration value="ja" />
+                  <xs:enumeration value="zh-CN" />
+                  <xs:enumeration value="zh-TW" />
+                  <xs:enumeration value="fr" />
+                  <xs:enumeration value="it" />
+                  <xs:enumeration value="de" />
+                  <xs:enumeration value="es" />
+                  <xs:enumeration value="pt" />
+                  <xs:enumeration value="ru" />
+                  <xs:enumeration value="ko" />
+                </xs:restriction>
+              </xs:simpleType>
+            </xs:element>
+            <xs:element name="language" type="xs:string" minOccurs="0" />
+            <xs:element name="name" type="xs:string" minOccurs="0" />
+            <xs:element name="expansion" type="xs:string" minOccurs="0" />
+            <xs:element name="collectorNumber" type="xs:string" minOccurs="0" />
+            <xs:element name="rarity" minOccurs="0">
+              <xs:simpleType>
+                <xs:restriction base="xs:string">
+                  <xs:enumeration value="M">
+                    <xs:annotation>
+                      <xs:documentation>Mythic Rare</xs:documentation>
+                    </xs:annotation>
+                  </xs:enumeration>
+                  <xs:enumeration value="R">
+                    <xs:annotation>
+                      <xs:documentation>Rare</xs:documentation>
+                    </xs:annotation>
+                  </xs:enumeration>
+                  <xs:enumeration value="U">
+                    <xs:annotation>
+                      <xs:documentation>Uncommon</xs:documentation>
+                    </xs:annotation>
+                  </xs:enumeration>
+                  <xs:enumeration value="C">
+                    <xs:annotation>
+                      <xs:documentation>Common</xs:documentation>
+                    </xs:annotation>
+                  </xs:enumeration>
+                  <xs:enumeration value="L">
+                    <xs:annotation>
+                      <xs:documentation>Basic Land</xs:documentation>
+                    </xs:annotation>
+                  </xs:enumeration>
+                  <xs:enumeration value="T">
+                    <xs:annotation>
+                      <xs:documentation>Token</xs:documentation>
+                    </xs:annotation>
+                  </xs:enumeration>
+                  <xs:enumeration value="E">
+                    <xs:annotation>
+                      <xs:documentation>Emblem</xs:documentation>
+                    </xs:annotation>
+                  </xs:enumeration>
+                  <xs:enumeration value="F">
+                    <xs:annotation>
+                      <xs:documentation>Substitute Card</xs:documentation>
+                    </xs:annotation>
+                  </xs:enumeration>
+                  <xs:enumeration value="A">
+                    <xs:annotation>
+                      <xs:documentation>Ad Card</xs:documentation>
+                    </xs:annotation>
+                  </xs:enumeration>
+                  <xs:enumeration value="G">
+                    <xs:annotation>
+                      <xs:documentation>Minigame Card</xs:documentation>
+                    </xs:annotation>
+                  </xs:enumeration>
+                  <xs:enumeration value="X">
+                    <xs:annotation>
+                      <xs:documentation>Panchout Card</xs:documentation>
+                    </xs:annotation>
+                  </xs:enumeration>
+                  <xs:enumeration value="S">
+                    <xs:annotation>
+                      <xs:documentation>Special</xs:documentation>
+                    </xs:annotation>
+                  </xs:enumeration>
+                  <xs:enumeration value="P">
+                    <xs:annotation>
+                      <xs:documentation>Promotion</xs:documentation>
+                    </xs:annotation>
+                  </xs:enumeration>
+                </xs:restriction>
+              </xs:simpleType>
+            </xs:element>
+            <xs:element name="artist" type="xs:string" minOccurs="0" />
+            <xs:element name="cardFrame" type="xs:string" minOccurs="0" />
+            <xs:element name="surface" minOccurs="0">
+              <xs:annotation>
+                <xs:documentation>
+                  Surface treatment of cards. "other" is expected to use for special foils.
+                </xs:documentation>
+              </xs:annotation>
+              <xs:simpleType>
+                <xs:restriction base="xs:string">
+                  <xs:enumeration value="normal" />
+                  <xs:enumeration value="foil" />
+                  <xs:enumeration value="other" />
+                </xs:restriction>
+              </xs:simpleType>
+            </xs:element>
+            <xs:element name="condition" type="xs:string" minOccurs="0" />
           </xs:sequence>
         </xs:complexType>
       </xs:element>
     </xs:sequence>
     <xs:attribute name="num" type="xs:positiveInteger" use="required" />
   </xs:complexType>
-
 
   <xs:element name="cardItem">
     <xs:complexType>
